@@ -13,6 +13,11 @@ import javax.swing.JPanel;
 
 import controller.Main_Controller;
 
+/**
+ * Hier wird das Visuelle und die Logik dahinter erzeugt
+ * @author Sebastian Sacher
+ *
+ */
 @SuppressWarnings("serial")
 public class GUI_View extends JFrame{
 
@@ -34,6 +39,10 @@ public class GUI_View extends JFrame{
 
 	public static JLabel counter = new JLabel();
 
+	/**
+	 * HIER wird das visuelle erzeugt
+	 * @author Sebastian Sacher und Mario Ottomaier
+	 */
 	public GUI_View() {
 		super("Lights Out (5x5)");
 		mainPanel = new JPanel(new BorderLayout());
@@ -52,7 +61,7 @@ public class GUI_View extends JFrame{
 		counter.setBackground(Color.BLACK);
 		counter.setForeground(Color.WHITE);
 		counter.setOpaque(true);
-		counter.setText("Spielzug 0");
+		counter.setText("0. Zug");
 		counter.setHorizontalAlignment(JLabel.CENTER);
 		topPanel.add(counter, BorderLayout.NORTH);
 		
@@ -66,6 +75,11 @@ public class GUI_View extends JFrame{
 			}
 		}
 		
+		//Erste grüne Fläche
+		int a = 2;
+		int b = 2;
+		buttons[a][b].setBackground(Color.GREEN);
+		
 		this.setBackground(Color.BLACK);
 		this.setResizable(false);
 		this.pack();
@@ -73,5 +87,83 @@ public class GUI_View extends JFrame{
 		this.setSize(new Dimension(X_DIM, Y_DIM));
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
+	}
+	
+	/**
+	 * Eine Hilfsmethode die die Farbe setzt
+	 * @author Sebastian Sacher
+	 * @param i Die Y-Koordinate
+	 * @param j Die X-Koordinate
+	 * @param gC zählt wie viele grüne Flächen noch da sind (Bei null wird eine Nachricht im Controller ausgegeben)
+	 */
+	public static void setColor(int i, int j, int gC) {
+		int greenCounter = gC;
+		try{
+			if(buttons[i][j].getBackground()==Color.BLACK){
+				buttons[i][j].setBackground(Color.GREEN);
+				greenCounter++;
+			} else {
+				buttons[i][j].setBackground(Color.BLACK);
+				greenCounter--;
+			}
+		} catch (ArrayIndexOutOfBoundsException e){
+		}
+		try{	
+			if(buttons[i+1][j].getBackground()==Color.BLACK){
+				buttons[i+1][j].setBackground(Color.GREEN);
+				greenCounter++;
+			} else {
+				buttons[i+1][j].setBackground(Color.BLACK);
+				greenCounter--;
+			}
+		} catch (ArrayIndexOutOfBoundsException e){
+		}
+		try{
+			if(buttons[i-1][j].getBackground()==Color.BLACK){
+				buttons[i-1][j].setBackground(Color.GREEN);
+				greenCounter++;
+			} else {
+				buttons[i-1][j].setBackground(Color.BLACK);
+				greenCounter--;
+			}
+		} catch (ArrayIndexOutOfBoundsException e){
+		}
+		try{
+			if(buttons[i][j+1].getBackground()==Color.BLACK){
+				buttons[i][j+1].setBackground(Color.GREEN);
+				greenCounter++;
+			} else {
+				buttons[i][j+1].setBackground(Color.BLACK);
+				greenCounter--;
+			}
+		} catch (ArrayIndexOutOfBoundsException e){
+		}
+		try{
+			if(buttons[i][j-1].getBackground()==Color.BLACK){
+				buttons[i][j-1].setBackground(Color.GREEN);
+				greenCounter++;
+			} else {
+				buttons[i][j-1].setBackground(Color.BLACK);
+				greenCounter--;
+			}
+		} catch (ArrayIndexOutOfBoundsException e){
+		}
+		//System.out.println(greenCounter);
+		Main_Controller.gC = greenCounter;
+	}
+	
+	/**
+	 * Eine Hilfsmethode die das Spielfeld zurücksetzt
+	 * @author Sebastian Sacher
+	 */
+	public static void reset(){
+		for(int i=0;i<buttons.length;i++){
+			for(int j=0;j<buttons.length;j++){
+				buttons[i][j].setBackground(Color.BLACK);
+			}
+		}
+		buttons[(int)(Math.random()*5)][(int)(Math.random()*5)].setBackground(Color.GREEN);
+		Main_Controller.counterV = 0;
+		counter.setText(Main_Controller.counterV + ". Zug");
 	}
 }

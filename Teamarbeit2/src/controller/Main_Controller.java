@@ -1,13 +1,18 @@
 package controller;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import view.GUI_View;
 
+/**
+ * Hier sind die ActionListener und die Main
+ * @author Sebastian Sacher
+ *
+ */
 public class Main_Controller implements ActionListener {
 
 	public static void main(String[] args) {
@@ -18,44 +23,32 @@ public class Main_Controller implements ActionListener {
 	int a;
 	int b;
 	boolean c = true;
-	public int counterV = 0;
+	public static int counterV = 0;
 	public static JButton[][] buttons = GUI_View.buttons;
+	public static int gC = 0;
 
+	/**
+	 * Hier werden die Buttons behandelt und bei Erfold eine Nachricht ausgegeben(JOptionPane)
+	 * @author Sebastian Sacher
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		for(int i=0;i<buttons.length;i++){
 			for(int j=0;j<buttons.length;j++){
-				if(e.getSource().equals(buttons[i][j])){
-					if(buttons[i][j].getBackground()==Color.BLACK){
-						buttons[i][j].setBackground(Color.GREEN);
-					} else buttons[i][j].setBackground(Color.BLACK);
-					
-					if(i<5/**ränder und ecken**/){
-						if(buttons[i][j].getBackground()==Color.BLACK){
-							buttons[i][j].setBackground(Color.GREEN);
-						} else buttons[i][j].setBackground(Color.BLACK);
+				if(e.getSource().equals(GUI_View.buttons[i][j])){
+					GUI_View.setColor(i,j,gC);
+					counterV++;
+					GUI_View.counter.setText(counterV + ". Zug");
+					if(gC==0){
+						JOptionPane.showMessageDialog(null, "Glückwunsch! \n Sie haben Lights Out mit " + counterV + " Zügen geschafft!");
+						GUI_View.reset();
+						break;
 					}
-					
-					if(buttons[i-1][j].getBackground()==Color.BLACK){
-						buttons[i-1][j].setBackground(Color.GREEN);
-					} else buttons[i-1][j].setBackground(Color.BLACK);
-					
-					if(buttons[i][j+1].getBackground()==Color.BLACK){
-						buttons[i][j+1].setBackground(Color.GREEN);
-					} else buttons[i][j+1].setBackground(Color.BLACK);
-					
-					if(buttons[i][j-1].getBackground()==Color.BLACK){
-						buttons[i][j-1].setBackground(Color.GREEN);
-					} else buttons[i][j-1].setBackground(Color.BLACK);
 				}
 			}
 		}
 		if(e.getSource().equals(GUI_View.newGame)){
-			for(int i=0;i<buttons.length;i++){
-				for(int j=0;j<buttons.length;j++){
-					buttons[i][j].setBackground(Color.BLACK);
-				}
-			}
+			GUI_View.reset();
 		}
 	}
 }
