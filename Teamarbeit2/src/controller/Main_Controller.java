@@ -11,7 +11,7 @@ import view.GUI_View;
 /**
  * Hier sind die ActionListener und die Main
  * @author Sebastian Sacher und Felix Wöls
- *
+ *1
  */
 public class Main_Controller implements ActionListener {
 

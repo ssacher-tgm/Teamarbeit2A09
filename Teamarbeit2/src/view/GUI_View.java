@@ -16,7 +16,7 @@ import controller.Main_Controller;
 /**
  * Hier wird das Visuelle und die Logik dahinter erzeugt
  * @author Sebastian Sacher und Mario Ottomaier
- *
+ *1
  */
 @SuppressWarnings("serial")
 public class GUI_View extends JFrame{
