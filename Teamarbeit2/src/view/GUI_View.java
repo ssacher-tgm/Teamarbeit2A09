@@ -15,7 +15,7 @@ import controller.Main_Controller;
 
 /**
  * Hier wird das Visuelle und die Logik dahinter erzeugt
- * @author Sebastian Sacher
+ * @author Sebastian Sacher und Mario Ottomaier
  *
  */
 @SuppressWarnings("serial")
@@ -41,7 +41,7 @@ public class GUI_View extends JFrame{
 
 	/**
 	 * HIER wird das visuelle erzeugt
-	 * @author Sebastian Sacher und Mario Ottomaier
+	 * @author Sebastian Sacher und Mario Ottomaier und Felix Wöls
 	 */
 	public GUI_View() {
 		super("Lights Out (5x5)");
